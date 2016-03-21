@@ -104,7 +104,7 @@ class WebPushCryptographer {
 
     }).then(([contentEncryptionKey, nonce]) => {
       const record = new Uint8Array(2 + paddingBytes + plaintext.byteLength);
-      record.set([ paddingBytes & 0xFF, paddingBytes >> 8 ]);
+      record.set([ paddingBytes >> 8, paddingBytes & 0xFF ]);
       record.fill(0, 2 /* sizeof(uint16_t) */, 2 + paddingBytes);
       record.set(new Uint8Array(plaintext), 2 + paddingBytes);
 
